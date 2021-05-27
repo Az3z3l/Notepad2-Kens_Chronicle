@@ -59,7 +59,7 @@ func getIDFromCooke(r *http.Request, w http.ResponseWriter) string {
 			Value:    cookeval,
 			SameSite: 2,
 			HttpOnly: true,
-			// Secure:   true,
+			Secure:   true,
 		}
 		http.SetCookie(w, &c)
 	}
