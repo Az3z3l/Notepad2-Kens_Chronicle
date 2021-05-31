@@ -15,8 +15,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-const adminID = "vfYZ35mry2cVqOPNo1xnL1HE0VW5tp7oMX"
-const adminNOTE = "inctf{theres_a_part_2_6552637428346}"
+const adminID = "7his15N07th30riG1N4L99999999999999"
+const adminNOTE = "inctf{this_is_not_the_flag}"
 
 var Notes = make(map[string]string)
 
@@ -51,7 +51,7 @@ func getIDFromCooke(r *http.Request, w http.ResponseWriter) string {
 			Value:    cookeval,
 			SameSite: 2,
 			HttpOnly: true,
-			Secure:   true,
+			Secure:   true, // change to false if deploying locally
 		}
 		http.SetCookie(w, &c)
 	}

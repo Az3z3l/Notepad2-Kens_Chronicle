@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>
+            NotePad 2
+        </title>
+    </head>
+    <body onload="init()">
+        <center>
+            <h2>The Notes Page</h2>
+            Add your note
+        </center>
+
+            <br />
+            <i>
+                <div id="my-stuff">
+
+                </div>
+            </i>
+            <br />
+        <center>
+            <textarea id="note-dev" rows="7" cols="200">
+
+            </textarea>
+            <br />
+            <button type="button" onclick="addNote()" spellcheck="true">Add Note</button>
+        </center>
+
+
+        <script>
+            async function addNote() {
+                x=document.getElementById("note-dev").value.trim()
+                const response = await fetch("/add", {
+                    method: 'POST', 
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: `content=${x}`
+                });
+                z = await (response.text());
+                changeNote(x)
+            }
+
+            function changeNote(play){
+                let ele = document.getElementById('my-stuff');
+                ele.innerText = play;
+                document.getElementById("note-dev").value = ""
+            }
+
+            async function init(){
+                const response = await fetch("/get", {
+                    method: 'GET', 
+                });
+                z = await (response.text());
+                changeNote(z)
+            }
+
+        </script>
+    </body>
+</html>
