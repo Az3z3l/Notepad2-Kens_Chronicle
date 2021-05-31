@@ -15,8 +15,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-const adminID = "vfYZ35mry2cVqOPNo1xnL1HE0VW5tp7oMX"
-const adminNOTE = "inctf{theres_a_part_2_6552637428346}"
+const adminID = "7JtYAMsyQYAg2ReT5PyoJeH9rVRikBx6Cp"
+const adminNOTE = "inctf{never_gonna_give_you_up_lkbsdgbyhsl}"
 
 var Notes = make(map[string]string)
 
