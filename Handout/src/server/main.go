@@ -16,7 +16,7 @@ import (
 )
 
 const adminID = "7his15N07th30riG1N4L99999999999999"
-const adminNOTE = "inctf{this_is_not_the_flag}"
+const adminNOTE = "inctf{FLAG}"
 
 var Notes = make(map[string]string)
 
@@ -51,7 +51,7 @@ func getIDFromCooke(r *http.Request, w http.ResponseWriter) string {
 			Value:    cookeval,
 			SameSite: 2,
 			HttpOnly: true,
-			Secure:   true, // change to false if deploying locally
+			Secure:   true,
 		}
 		http.SetCookie(w, &c)
 	}
