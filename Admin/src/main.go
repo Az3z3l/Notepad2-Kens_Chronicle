@@ -16,15 +16,16 @@ import (
 )
 
 const adminID = "7JtYAMsyQYAg2ReT5PyoJeH9rVRikBx6Cp"
-const adminNOTE = "inctf{never_gonna_give_you_up_lkbsdgbyhsl}"
+const adminNOTE = "inctf{tis_a_mooo_point_lkbsdgbyhsl}"
 
 var Notes = make(map[string]string)
 
 // Prevent XSS on api-endpoints ¬‿¬
 var cType = map[string]string{
-	"Content-Type":           "text/plain",
-	"x-content-type-options": "nosniff",
-	"X-Frame-Options":        "DENY",
+	"Content-Type":            "text/plain",
+	"x-content-type-options":  "nosniff",
+	"X-Frame-Options":         "DENY",
+	"Content-Security-Policy": "default-src 'none';",
 }
 
 func cookGenerator() string {
@@ -123,12 +124,21 @@ func find(w http.ResponseWriter, r *http.Request) {
 		responseee = x
 	} else {
 		_, present := param["debug"]
-
 		if present {
+			delete(param, "debug")
+			delete(param, "startsWith")
+			delete(param, "endsWith")
+			delete(param, "condition")
+
 			for k, v := range param {
 				for _, d := range v {
-					w.Header().Set(k, d)
+
+					if regexp.MustCompile("^[a-zA-Z0-9{}_;-]*$").MatchString(k) && len(d) < 50 {
+						w.Header().Set(k, d)
+					}
+					break
 				}
+				break
 			}
 		}
 		responseee = "404 No Note Found"

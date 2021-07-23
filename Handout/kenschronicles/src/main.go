@@ -15,16 +15,17 @@ import (
 	"github.com/gorilla/mux"
 )
 
-const adminID = "7his15N07th30riG1N4L99999999999999"
-const adminNOTE = "inctf{FLAG}"
+const adminID = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+const adminNOTE = "inctf{flag}"
 
 var Notes = make(map[string]string)
 
 // Prevent XSS on api-endpoints ¬‿¬
 var cType = map[string]string{
-	"Content-Type":           "text/plain",
-	"x-content-type-options": "nosniff",
-	"X-Frame-Options":        "DENY",
+	"Content-Type":            "text/plain",
+	"x-content-type-options":  "nosniff",
+	"X-Frame-Options":         "DENY",
+	"Content-Security-Policy": "default-src 'none';",
 }
 
 func cookGenerator() string {
@@ -123,12 +124,21 @@ func find(w http.ResponseWriter, r *http.Request) {
 		responseee = x
 	} else {
 		_, present := param["debug"]
-
 		if present {
+			delete(param, "debug")
+			delete(param, "startsWith")
+			delete(param, "endsWith")
+			delete(param, "condition")
+
 			for k, v := range param {
 				for _, d := range v {
-					w.Header().Set(k, d)
+
+					if regexp.MustCompile("^[a-zA-Z0-9{}_;-]*$").MatchString(k) && len(d) < 50 {
+						w.Header().Set(k, d)
+					}
+					break
 				}
+				break
 			}
 		}
 		responseee = "404 No Note Found"

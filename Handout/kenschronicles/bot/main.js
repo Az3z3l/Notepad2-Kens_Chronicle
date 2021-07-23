@@ -3,11 +3,11 @@ const puppeteer = require('puppeteer');
 
 const thecookie = {
     name: 'id',
-    value: '7his15N07th30riG1N4L99999999999999',
-    domain: 'localhost',
+    value: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    domain: 'chall.notepad2.gq',
     expires: -1,
     httpOnly: true,
-    // secure: true,
+    secure: true,
     session: true,
     sameSite: 'Lax',
   }

@@ -1,4 +1,4 @@
-module notepad-2
+module notepad2
 
 go 1.16
 

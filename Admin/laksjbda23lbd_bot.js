@@ -1,3 +1,4 @@
+// Notepad 2 : ken's Chronicles
 const puppeteer = require('puppeteer');
 var queue = require('../redis-controller/queue');
 const queueName = __filename.split(".")[0].split("/").pop();
@@ -7,7 +8,7 @@ const challName = "Notepad 2"
 const thecookie = {
     name: 'id',
     value: '7JtYAMsyQYAg2ReT5PyoJeH9rVRikBx6Cp',
-    domain: '9db5fca7c60f.ngrok.io',
+    domain: 'chall.notepad2.gq',
     expires: -1,
     httpOnly: true,
     secure: true,
