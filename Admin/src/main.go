@@ -43,7 +43,7 @@ func headerSetter(w http.ResponseWriter, header map[string]string) {
 
 func getIDFromCooke(r *http.Request, w http.ResponseWriter) string {
 	var cooke, err = r.Cookie("id")
-	re := regexp.MustCompile("^[a-zA-Z0-9]*$")
+	re := regexp.MustCompile("^[a-zA-Z0-9]+$")
 	var cookeval string
 	if err == nil && re.MatchString(cooke.Value) && len(cooke.Value) <= 35 && len(cooke.Value) >= 30 {
 		cookeval = cooke.Value
