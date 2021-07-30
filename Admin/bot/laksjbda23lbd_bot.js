@@ -1,4 +1,4 @@
-// Notepad 2 : ken's Chronicles
+// Notepad 2 : Ken's Chronicle
 const puppeteer = require('puppeteer');
 var queue = require('../redis-controller/queue');
 const queueName = __filename.split(".")[0].split("/").pop();

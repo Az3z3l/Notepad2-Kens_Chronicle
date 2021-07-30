@@ -7,7 +7,7 @@
 [Source](./Handout/kenschronicles.zip)
 
 ### MD5 Hash:
-`cbab4a44b33efd270d384767f74a2482`
+`037a5f449a5925aaf0aa93b3bfb5a8584a36c9dd`
 
 ### Short Writeup
 

@@ -1,5 +1,7 @@
+// Notepad2 - Ken's Chronicle
 const puppeteer = require('puppeteer');
 
+const challName = "Notepad 2"
 
 const thecookie = {
     name: 'id',
