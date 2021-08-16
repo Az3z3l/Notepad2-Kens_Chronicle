@@ -1,13 +1,12 @@
 // Notepad 2 : Ken's Chronicle
 const puppeteer = require('puppeteer');
-var queue = require('../redis-controller/queue');
-const queueName = __filename.split(".")[0].split("/").pop();
+
 
 const challName = "Notepad 2"
 
 const thecookie = {
     name: 'id',
-    value: '7JtYAMsyQYAg2ReT5PyoJeH9rVRikBx6Cp',
+    value: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
     domain: 'chall.notepad2.gq',
     expires: -1,
     httpOnly: true,
@@ -18,7 +17,7 @@ const thecookie = {
 
 
 
-  async function url_visit (url) {
+async function url_visit (url) {
     var quote;
     return new Promise(async function(resolve, reject) {
         // start modification
@@ -59,7 +58,6 @@ async function sendUrl(err, url) {
     } 
 }
 
-console.log(`Started bot for chall ${challName} with id ${queueName}`)
-popMe()
-setTimeout(popMe, 1e3*2);
-setTimeout(popMe, 1e3*3);
+
+url = "<your url>"
+url_visit(url)

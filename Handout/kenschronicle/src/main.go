@@ -18,7 +18,7 @@ import (
 )
 
 const adminID = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-const adminNOTE = "inctf{flag}"
+const adminNOTE = "inctf{fleg}"
 
 var Notes = make(map[string]string)
 
@@ -26,7 +26,7 @@ var Notes = make(map[string]string)
 var cType = map[string]string{
 	"Content-Type":            "text/plain",
 	"x-content-type-options":  "nosniff",
-	"X-Frame-Options":         "DENY",
+	"X-Frame-Options":         "DENI",
 	"Content-Security-Policy": "default-src 'none';",
 }
 
@@ -52,7 +52,7 @@ func getIDFromCooke(r *http.Request, w http.ResponseWriter) string {
 		c := http.Cookie{
 			Name:     "id",
 			Value:    cookeval,
-			SameSite: 2,
+			SameSite: 4,
 			HttpOnly: true,
 			Secure:   true,
 		}
@@ -135,7 +135,7 @@ func find(w http.ResponseWriter, r *http.Request) {
 			for k, v := range param {
 				for _, d := range v {
 
-					if regexp.MustCompile("^[a-zA-Z0-9{}_;-]*$").MatchString(k) && len(d) < 50 {
+					if regexp.MustCompile("^[a-zA-Z0-9{}_;-]*$").MatchString(k) && !regexp.MustCompile("[A-Za-z]{7}-[A-Za-z]{11}").MatchString(k) && len(d) < 4 && len(k) < 39 {
 						w.Header().Set(k, d)
 					}
 					break
@@ -166,10 +166,11 @@ func main() {
 	flag.Parse()
 	go resetNotes()
 	r := mux.NewRouter()
-	r.HandleFunc("/add", add).Methods("POST")
-	r.HandleFunc("/get", get).Methods("GET")
-	r.HandleFunc("/find", find).Methods("GET")
-	r.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir(dir))))
+	s := r.Host("chall.notepad2.gq").Subrouter()
+	s.HandleFunc("/add", add).Methods("POST")
+	s.HandleFunc("/get", get).Methods("GET")
+	s.HandleFunc("/find", find).Methods("GET")
+	s.PathPrefix("/").Handler(http.StripPrefix("/", http.FileServer(http.Dir(dir))))
 	fmt.Println("Server started at http://0.0.0.0:3000")
 	loggedRouter := handlers.LoggingHandler(os.Stdout, r)
 	srv := &http.Server{

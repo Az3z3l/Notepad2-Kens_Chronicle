@@ -13,12 +13,12 @@ const thecookie = {
     httpOnly: true,
     secure: true,
     session: true,
-    sameSite: 'None',
+    sameSite: 'Lax',
   }
 
 
 
-  async function url_visit (url) {
+async function url_visit (url) {
     var quote;
     return new Promise(async function(resolve, reject) {
         // start modification
@@ -26,9 +26,10 @@ const thecookie = {
         const browser = await puppeteer.launch({executablePath: '/home/bot/latest/chrome'});  // add `{ args: ['--no-sandbox'] }` if running as root
         const page = await browser.newPage();         
         await page.setCookie(thecookie)
+        await page.setDefaultNavigationTimeout(1e3*15);  // Timeout duration in milliseconds    // use either this or wait for navigation
         try{
             var result = await page.goto(url);
-            await page.waitForTimeout(1e3*17);// wait for 17 seconds before closing              
+            await page.waitForNavigation(); // wait till the page finishes loading              
         }
         catch(e){
             console.log("timeout exceeded");

@@ -6,12 +6,13 @@
 ### Challenge File
 [Source](./Handout/kenschronicles.zip)
 
+### MD5 Hash:
+`33311933b5b1763c63576b1a6914004b`
 
 ### Short Writeup
 
-* Use `Timing-Allow-Origin: *` header as a way to identify if your startsWith character was wrong
-* If the header is set, and the page was opened using we can use iframes as a way to leak its state
-* When `Timing-Allow-Origin: *` is in the response, we can use Resource Timing api on the request and get an unfiltered result.
+* Use `Cross-Origin-Opener-Policy:same-origin` header as a way to identify if your startsWith character was wrong
+* If the header was set, and the page was opened using `x = window.open()`, `x.closed` would be true, else false
 * Refer [exploit](./Admin/exploit)
 
 ### Author
